@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Table from "./components/Table";
-import Pagination from "./components/Pagination";
 import { Project } from "./types";
-import { styled } from "styled-components";
+import { Table, TableTitle } from "./components/Table";
+import { Pagination } from "./components/Pagination";
+import { fetchProjects } from "./api-client";
 
 const App: React.FC = () => {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -10,11 +10,15 @@ const App: React.FC = () => {
   const itemsPerPage = 5;
 
   useEffect(() => {
-    fetch(
-      "https://raw.githubusercontent.com/saaslabsco/frontend-assignment/refs/heads/master/frontend-assignment.json"
-    )
-      .then((response) => response.json())
-      .then((data) => setProjects(data));
+    const fetchData = async () => {
+      try {
+        const data = await fetchProjects();
+        setProjects(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
   }, []);
 
   // Pagination logic
@@ -28,13 +32,6 @@ const App: React.FC = () => {
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
   };
-
-  const TableTitle = styled.h2`
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 24px;
-    color: #333;
-  `;
 
   return (
     <div className="app-container">

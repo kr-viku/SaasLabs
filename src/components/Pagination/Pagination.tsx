@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import { Button, PageInfo, PaginationWrapper } from ".";
 
 interface PaginationProps {
   currentPage: number;
@@ -8,7 +8,7 @@ interface PaginationProps {
   onPageChange: (pageNumber: number) => void;
 }
 
-const Pagination: React.FC<PaginationProps> = ({
+export const Pagination: React.FC<PaginationProps> = ({
   currentPage,
   totalItems,
   itemsPerPage,
@@ -36,29 +36,3 @@ const Pagination: React.FC<PaginationProps> = ({
     </PaginationWrapper>
   );
 };
-
-const PaginationWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-  align-items: center;
-`;
-
-const Button = styled.button`
-  padding: 10px 15px;
-  margin: 0 10px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  cursor: pointer;
-
-  &:disabled {
-    background-color: #ccc;
-  }
-`;
-
-const PageInfo = styled.span`
-  padding: 10px;
-`;
-
-export default Pagination;

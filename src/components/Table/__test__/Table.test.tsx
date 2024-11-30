@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import Table from "../components/Table";
+import { Table } from "..";
 
 const mockData = [
   {
